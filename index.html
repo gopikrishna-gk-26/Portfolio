@@ -1,86 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Gopi Krishna | Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gopi Krishna - Mechanical Engineer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Background Animation Container -->
+    <div id="background-animation"></div>
+    
+    <!-- Main Content Container -->
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="profile-section">
+                <div class="contact-info">
+                    <h1>Gopi Krishna</h1>
+                    <h2>Mechanical Engineer</h2>
+                    <p><i class="fas fa-map-marker-alt"></i> Theni, TamilNadu, India</p>
+                    <div class="contact-links">
+                        <a href="tel:+918637478050"><i class="fas fa-phone"></i> +91 8637478050</a>
+                        <a href="www.linkedin.com/in/gopi-krishna26" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn Profile</a>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-  <!-- Animated Background -->
-  <canvas id="bgCanvas"></canvas>
+        <!-- Navigation -->
+        <nav class="nav">
+            <ul>
+                <li><a href="#summary">Summary</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#activities">Activities</a></li>
+            </ul>
+        </nav>
 
-  <!-- Main Content -->
-  <main class="content">
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Summary Section -->
+            <section id="summary" class="section card">
+                <h2 class="section-title"><i class="fas fa-user"></i> Professional Summary</h2>
+                <p>A passionate Mechanical Engineer driven by design innovation and precision. As the Student Secretary, I've honed my leadership and organizational skills, blending teamwork with technical creativity. Enthusiastic about CAD design and HyperMesh analysis, I aim to bring ideas to life through smart engineering solutions.</p>
+            </section>
 
-    <section class="hero">
-      <h1>Gopi Krishna</h1>
-      <p class="subtitle">
-        Electronics & Embedded Systems | IoT | Engineering Enthusiast
-      </p>
-    </section>
+            <!-- Education Section -->
+            <section id="education" class="section card">
+                <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
+                <div class="education-item">
+                    <h3>Thanthai Periyar Government Institute of Technology - Vellore</h3>
+                    <p class="degree">B.E. Mechanical Engineering (2022 - 2026)</p>
+                    <p class="details">CGPA: 7.6</p>
+                </div>
+                <div class="education-item">
+                    <h3>BVM Matric Higher Secondary School</h3>
+                    <p class="degree">HSC - 2022</p>
+                    <p class="details">Percentage: 81.33%</p>
+                </div>
+                <div class="education-item">
+                    <h3>SRG Government High School</h3>
+                    <p class="degree">SSLC - 2020</p>
+                    <p class="details">Percentage: 78.6%</p>
+                </div>
+            </section>
 
-    <section>
-      <h2>About Me</h2>
-      <p>
-        <!-- Replace with About section from resume -->
-        Passionate engineering graduate with hands-on experience in embedded
-        systems, IoT projects, and real-time hardware–software integration.
-      </p>
-    </section>
+            <!-- Experience & Skills Section -->
+            <div class="two-column">
+                <!-- Hands-on Experience -->
+                <section id="experience" class="section card">
+                    <h2 class="section-title"><i class="fas fa-tools"></i> Technical Skills</h2>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <i class="fas fa-desktop"></i>
+                            <span>MS Office (Word, PPT, Excel)</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-drafting-compass"></i>
+                            <span>AutoCad 2D Drafting</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-cube"></i>
+                            <span>Solidworks 3D Modelling</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Hypermesh</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-paint-brush"></i>
+                            <span>Adobe Lightroom</span>
+                        </div>
+                    </div>
+                </section>
 
-    <section>
-      <h2>Technical Skills</h2>
-      <ul class="grid">
-        <!-- Replace with your actual skills -->
-        <li>Embedded C / Arduino</li>
-        <li>ESP32 / IoT Systems</li>
-        <li>Sensors & Actuators</li>
-        <li>HTML, CSS, JavaScript</li>
-        <li>ThingSpeak, Cloud APIs</li>
-      </ul>
-    </section>
+                <!-- Soft Skills -->
+                <section id="skills" class="section card">
+                    <h2 class="section-title"><i class="fas fa-brain"></i> Soft Skills</h2>
+                    <ul class="soft-skills">
+                        <li>Strong organizational and time-management skills</li>
+                        <li>Exceptional communication and interpersonal skills</li>
+                        <li>Ability to work independently and as part of a team</li>
+                        <li>Detail-oriented and able to handle multiple tasks simultaneously</li>
+                    </ul>
+                </section>
+            </div>
 
-    <section>
-      <h2>Projects</h2>
+            <!-- Projects Section -->
+            <section id="projects" class="section card">
+                <h2 class="section-title"><i class="fas fa-project-diagram"></i> Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-item">
+                        <h3>Development of Baby Abduction Prevention System</h3>
+                        <p>An innovative security system designed to prevent unauthorized removal of infants from designated areas using advanced sensing technology.</p>
+                    </div>
+                    <div class="project-item">
+                        <h3>Earth Leakage Detection System</h3>
+                        <p>A safety mechanism designed to detect earth leakage currents and prevent electrical hazards in residential and commercial setups.</p>
+                    </div>
+                </div>
+            </section>
 
-      <div class="card">
-        <h3>IoT-Based Electrical Leakage Detection</h3>
-        <p>
-          Designed a real-time monitoring system using ESP32,
-          current sensors, cloud data logging, and SMS alerts.
-        </p>
-      </div>
+            <!-- Activities & Certifications -->
+            <section id="activities" class="section card">
+                <h2 class="section-title"><i class="fas fa-award"></i> Certifications & Activities</h2>
+                <div class="activities-grid">
+                    <div class="activity-item">
+                        <h3>Certifications</h3>
+                        <ul>
+                            <li>Tritiya Sopan Training Camp - Scout & Guides</li>
+                            <li>Workshop on "Additive Manufacturing for Future" at VIT Vellore</li>
+                            <li>Workshop on "Product design and Development" at TPGIT Vellore</li>
+                            <li>2 NPTEL Courses</li>
+                        </ul>
+                    </div>
+                    <div class="activity-item">
+                        <h3>Extra-Curricular</h3>
+                        <ul>
+                            <li>Pencil Sketching</li>
+                            <li>Flutist</li>
+                            <li>Silambam & Yoga</li>
+                            <li>Music, Fitness and Books Reading</li>
+                        </ul>
+                    </div>
+                    <div class="activity-item">
+                        <h3>Memberships</h3>
+                        <ul>
+                            <li>Student Secretary (Mech.)</li>
+                            <li>ASHRAE Student Member (Active)</li>
+                            <li>ISHRAE Student Member (Active)</li>
+                            <li>E-Yantra Innovation Challenge - IIT Bombay</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
 
-      <div class="card">
-        <h3>Embedded Automation Systems</h3>
-        <p>
-          Developed microcontroller-based automation and safety
-          applications integrating relays, sensors, and web dashboards.
-        </p>
-      </div>
+            <!-- Languages -->
+            <section class="section card">
+                <h2 class="section-title"><i class="fas fa-language"></i> Languages</h2>
+                <div class="languages">
+                    <span class="language-tag">Tamil</span>
+                    <span class="language-tag">English</span>
+                    <span class="language-tag">Telugu</span>
+                </div>
+            </section>
 
-    </section>
+            <!-- Internships -->
+            <section class="section card">
+                <h2 class="section-title"><i class="fas fa-briefcase"></i> Internships</h2>
+                <div class="internships">
+                    <div class="internship-item">
+                        <h3>On-Load Gears Pvt. Ltd.</h3>
+                    </div>
+                    <div class="internship-item">
+                        <h3>Zeekers Technology Solutions Pvt. Ltd.</h3>
+                    </div>
+                </div>
+            </section>
+        </main>
 
-    <section>
-      <h2>Education</h2>
-      <p>
-        <!-- Replace with exact education details -->
-        Bachelor’s Degree in Engineering<br />
-        Specialization: Electronics / Related Field
-      </p>
-    </section>
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Gopi Krishna. All rights reserved.</p>
+            <p>Portfolio with scroll-triggered animation background</p>
+        </footer>
+    </div>
 
-    <section class="contact">
-      <h2>Contact</h2>
-      <p>Email: your.email@example.com</p>
-      <p>LinkedIn | GitHub</p>
-    </section>
-
-  </main>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
