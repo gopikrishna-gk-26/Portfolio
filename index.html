@@ -6,289 +6,568 @@
     <title>Gopi Krishna - Mechanical Engineer</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Background Animation Container -->
-    <div id="background-animation">
-        <!-- Animation frames will be loaded here -->
-    </div>
+    <!-- Background Animation -->
+    <div id="background-animation"></div>
     
-    <!-- Animation Controls -->
-    <div class="animation-controls">
-        <button id="toggle-animation"><i class="fas fa-play"></i> Toggle Animation</button>
-        <button id="pause-animation"><i class="fas fa-pause"></i> Pause</button>
-        <div class="animation-speed">
-            <label for="speed-slider">Speed:</label>
-            <input type="range" id="speed-slider" min="1" max="10" value="5">
-        </div>
-    </div>
-    
-    <!-- Main Content Container -->
+    <!-- Main Container -->
     <div class="container">
-        <!-- Header Section -->
-        <header class="header">
-            <div class="profile-section">
-                <div class="profile-image">
-                    <!-- Placeholder for profile image -->
-                    <div class="image-placeholder">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="profile-container">
+                <div class="profile-img">
+                    <div class="img-placeholder">
                         <i class="fas fa-user-circle"></i>
                     </div>
                 </div>
-                <div class="contact-info">
-                    <h1>Gopi Krishna</h1>
-                    <h2>Mechanical Engineer</h2>
+                <h1 class="profile-name">Gopi Krishna</h1>
+                <h2 class="profile-title">Mechanical Engineer</h2>
+                <div class="profile-contact">
                     <p><i class="fas fa-map-marker-alt"></i> Theni, TamilNadu, India</p>
-                    <div class="contact-links">
-                        <a href="tel:+918637478050"><i class="fas fa-phone"></i> +91 8637478050</a>
-                        <a href="https://www.linkedin.com/in/gopi-krishna26" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn Profile</a>
-                    </div>
+                    <p><i class="fas fa-phone"></i> +91 8637478050</p>
+                    <p><i class="fas fa-envelope"></i> gopikrishna.mech@gmail.com</p>
+                    <p><i class="fab fa-linkedin"></i> linkedin.com/in/gopi-krishna26</p>
                 </div>
             </div>
-        </header>
-
-        <!-- Navigation -->
-        <nav class="nav">
-            <ul>
-                <li><a href="#summary"><i class="fas fa-user"></i> Summary</a></li>
-                <li><a href="#education"><i class="fas fa-graduation-cap"></i> Education</a></li>
-                <li><a href="#skills"><i class="fas fa-tools"></i> Skills</a></li>
-                <li><a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
-                <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
-                <li><a href="#activities"><i class="fas fa-award"></i> Activities</a></li>
-            </ul>
-        </nav>
-
-        <!-- Main Content -->
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#home" class="nav-link active" data-target="home"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#about" class="nav-link" data-target="about"><i class="fas fa-user"></i> About</a></li>
+                    <li><a href="#education" class="nav-link" data-target="education"><i class="fas fa-graduation-cap"></i> Education</a></li>
+                    <li><a href="#skills" class="nav-link" data-target="skills"><i class="fas fa-tools"></i> Skills</a></li>
+                    <li><a href="#projects" class="nav-link" data-target="projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
+                    <li><a href="#experience" class="nav-link" data-target="experience"><i class="fas fa-briefcase"></i> Experience</a></li>
+                    <li><a href="#certifications" class="nav-link" data-target="certifications"><i class="fas fa-certificate"></i> Certifications</a></li>
+                    <li><a href="#contact" class="nav-link" data-target="contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+                <p class="copyright">© 2024 Gopi Krishna</p>
+            </div>
+        </aside>
+        
+        <!-- Right Main Content -->
         <main class="main-content">
-            <!-- Summary Section -->
-            <section id="summary" class="section card">
-                <h2 class="section-title"><i class="fas fa-user"></i> Professional Summary</h2>
-                <p>A passionate Mechanical Engineer driven by design innovation and precision. As the Student Secretary, I've honed my leadership and organizational skills, blending teamwork with technical creativity. Enthusiastic about CAD design and HyperMesh analysis, I aim to bring ideas to life through smart engineering solutions.</p>
-            </section>
-
-            <!-- Education Section -->
-            <section id="education" class="section card">
-                <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
-                <div class="education-item">
-                    <div class="edu-icon">
-                        <i class="fas fa-university"></i>
-                    </div>
-                    <div class="edu-details">
-                        <h3>Thanthai Periyar Government Institute of Technology - Vellore</h3>
-                        <p class="degree">B.E. Mechanical Engineering (2022 - 2026)</p>
-                        <p class="details">CGPA: 7.6</p>
-                    </div>
-                </div>
-                <div class="education-item">
-                    <div class="edu-icon">
-                        <i class="fas fa-school"></i>
-                    </div>
-                    <div class="edu-details">
-                        <h3>BVM Matric Higher Secondary School</h3>
-                        <p class="degree">HSC - 2022</p>
-                        <p class="details">Percentage: 81.33%</p>
-                    </div>
-                </div>
-                <div class="education-item">
-                    <div class="edu-icon">
-                        <i class="fas fa-school"></i>
-                    </div>
-                    <div class="edu-details">
-                        <h3>SRG Government High School</h3>
-                        <p class="degree">SSLC - 2020</p>
-                        <p class="details">Percentage: 78.6%</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Skills Section -->
-            <section id="skills" class="section card">
-                <h2 class="section-title"><i class="fas fa-tools"></i> Technical Skills</h2>
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <div class="skill-icon">
-                            <i class="fas fa-desktop"></i>
-                        </div>
-                        <div class="skill-details">
-                            <h4>MS Office</h4>
-                            <p>Word, PPT, Excel</p>
+            <!-- Home Section -->
+            <section id="home" class="content-section active">
+                <div class="hero">
+                    <div class="hero-text">
+                        <h1 class="hero-title">Hello, I'm <span class="highlight">Gopi Krishna</span></h1>
+                        <h2 class="hero-subtitle">Mechanical Engineer & Designer</h2>
+                        <p class="hero-description">A passionate Mechanical Engineer driven by design innovation and precision. Blending technical creativity with smart engineering solutions.</p>
+                        <div class="hero-buttons">
+                            <a href="#projects" class="btn btn-primary">View My Work</a>
+                            <a href="#contact" class="btn btn-secondary">Contact Me</a>
                         </div>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-icon">
-                            <i class="fas fa-drafting-compass"></i>
-                        </div>
-                        <div class="skill-details">
-                            <h4>AutoCad</h4>
-                            <p>2D Drafting</p>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon">
-                            <i class="fas fa-cube"></i>
-                        </div>
-                        <div class="skill-details">
-                            <h4>Solidworks</h4>
-                            <p>3D Modelling</p>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon">
-                            <i class="fas fa-chart-bar"></i>
-                        </div>
-                        <div class="skill-details">
-                            <h4>Hypermesh</h4>
-                            <p>Analysis Software</p>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon">
-                            <i class="fas fa-paint-brush"></i>
-                        </div>
-                        <div class="skill-details">
-                            <h4>Adobe Lightroom</h4>
-                            <p>Photo Editing</p>
+                    <div class="hero-animation">
+                        <div class="animation-circle">
+                            <i class="fas fa-cogs"></i>
                         </div>
                     </div>
                 </div>
                 
-                <h3 class="sub-section-title"><i class="fas fa-brain"></i> Soft Skills</h3>
-                <div class="soft-skills">
-                    <div class="soft-skill-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Strong organizational and time-management skills</span>
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="stat-number">7.6</h3>
+                            <p class="stat-text">CGPA</p>
+                        </div>
                     </div>
-                    <div class="soft-skill-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Exceptional communication and interpersonal skills</span>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="stat-number">2+</h3>
+                            <p class="stat-text">Projects</p>
+                        </div>
                     </div>
-                    <div class="soft-skill-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Ability to work independently and as part of a team</span>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="stat-number">5+</h3>
+                            <p class="stat-text">Certifications</p>
+                        </div>
                     </div>
-                    <div class="soft-skill-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Detail-oriented and able to handle multiple tasks simultaneously</span>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="stat-number">3</h3>
+                            <p class="stat-text">Languages</p>
+                        </div>
                     </div>
                 </div>
             </section>
-
+            
+            <!-- About Section -->
+            <section id="about" class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">About Me</h2>
+                    <div class="section-line"></div>
+                </div>
+                
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>A passionate Mechanical Engineer driven by design innovation and precision. As the Student Secretary, I've honed my leadership and organizational skills, blending teamwork with technical creativity.</p>
+                        <p>Enthusiastic about CAD design and HyperMesh analysis, I aim to bring ideas to life through smart engineering solutions.</p>
+                        <div class="about-highlights">
+                            <div class="highlight-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Strong organizational and time-management skills</span>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Exceptional communication and interpersonal skills</span>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Ability to work independently and as part of a team</span>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Detail-oriented and able to handle multiple tasks</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-details">
+                        <div class="detail-card">
+                            <h3>Personal Info</h3>
+                            <ul>
+                                <li><strong>Location:</strong> Theni, TamilNadu, India</li>
+                                <li><strong>Email:</strong> gopikrishna.mech@gmail.com</li>
+                                <li><strong>Phone:</strong> +91 8637478050</li>
+                                <li><strong>Languages:</strong> Tamil, English, Telugu</li>
+                            </ul>
+                        </div>
+                        <div class="detail-card">
+                            <h3>Interests & Hobbies</h3>
+                            <div class="hobbies">
+                                <span class="hobby-tag">Pencil Sketching</span>
+                                <span class="hobby-tag">Flutist</span>
+                                <span class="hobby-tag">Silambam & Yoga</span>
+                                <span class="hobby-tag">Music</span>
+                                <span class="hobby-tag">Fitness</span>
+                                <span class="hobby-tag">Reading Books</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Education Section -->
+            <section id="education" class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Education</h2>
+                    <div class="section-line"></div>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2022 - 2026</div>
+                        <div class="timeline-content">
+                            <h3>B.E. Mechanical Engineering</h3>
+                            <h4>Thanthai Periyar Government Institute of Technology - Vellore</h4>
+                            <p>CGPA: 7.6</p>
+                            <div class="timeline-tags">
+                                <span class="tag">Engineering Design</span>
+                                <span class="tag">CAD/CAM</span>
+                                <span class="tag">Thermodynamics</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2020 - 2022</div>
+                        <div class="timeline-content">
+                            <h3>Higher Secondary Certificate (HSC)</h3>
+                            <h4>BVM Matric Higher Secondary School</h4>
+                            <p>Percentage: 81.33%</p>
+                            <div class="timeline-tags">
+                                <span class="tag">Physics</span>
+                                <span class="tag">Chemistry</span>
+                                <span class="tag">Mathematics</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2018 - 2020</div>
+                        <div class="timeline-content">
+                            <h3>Secondary School Leaving Certificate (SSLC)</h3>
+                            <h4>SRG Government High School</h4>
+                            <p>Percentage: 78.6%</p>
+                            <div class="timeline-tags">
+                                <span class="tag">Science</span>
+                                <span class="tag">Mathematics</span>
+                                <span class="tag">English</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Skills Section -->
+            <section id="skills" class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Technical Skills</h2>
+                    <div class="section-line"></div>
+                </div>
+                
+                <div class="skills-container">
+                    <div class="skill-category">
+                        <h3><i class="fas fa-desktop"></i> Software & Tools</h3>
+                        <div class="skill-list">
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span>MS Office (Word, PPT, Excel)</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span>AutoCad 2D Drafting</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span>Solidworks 3D Modelling</span>
+                                    <span>80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span>Hypermesh</span>
+                                    <span>75%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span>Adobe Lightroom</span>
+                                    <span>70%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 70%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3><i class="fas fa-brain"></i> Soft Skills</h3>
+                        <div class="soft-skills">
+                            <div class="soft-skill-tag">Leadership</div>
+                            <div class="soft-skill-tag">Teamwork</div>
+                            <div class="soft-skill-tag">Communication</div>
+                            <div class="soft-skill-tag">Time Management</div>
+                            <div class="soft-skill-tag">Problem Solving</div>
+                            <div class="soft-skill-tag">Creativity</div>
+                            <div class="soft-skill-tag">Organization</div>
+                            <div class="soft-skill-tag">Adaptability</div>
+                        </div>
+                        
+                        <h3><i class="fas fa-language"></i> Languages</h3>
+                        <div class="language-skills">
+                            <div class="language-item">
+                                <span>Tamil</span>
+                                <div class="language-level">
+                                    <div class="dot filled"></div>
+                                    <div class="dot filled"></div>
+                                    <div class="dot filled"></div>
+                                    <div class="dot filled"></div>
+                                    <div class="dot filled"></div>
+                                </div>
+                                <span>Native</span>
+                            </div>
+                            <div class="language-item">
+                                <span>English</span>
+                                <div class="language-level">
+                                    <div class="dot filled"></div>
+                                    <div class="dot filled"></div>
+                                    <div class="dot filled"></div>
+                                    <div class="dot filled"></div>
+                                    <div class="dot"></div>
+                                </div>
+                                <span>Fluent</span>
+                            </div>
+                            <div class="language-item">
+                                <span>Telugu</span>
+                                <div class="language-level">
+                                    <div class="dot filled"></div>
+                                    <div class="dot filled"></div>
+                                    <div class="dot filled"></div>
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                </div>
+                                <span>Intermediate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
             <!-- Projects Section -->
-            <section id="projects" class="section card">
-                <h2 class="section-title"><i class="fas fa-project-diagram"></i> Projects</h2>
+            <section id="projects" class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Projects</h2>
+                    <div class="section-line"></div>
+                </div>
+                
                 <div class="projects-grid">
-                    <div class="project-item">
+                    <div class="project-card">
                         <div class="project-icon">
                             <i class="fas fa-baby"></i>
                         </div>
-                        <div class="project-details">
-                            <h3>Development of Baby Abduction Prevention System</h3>
-                            <p>An innovative security system designed to prevent unauthorized removal of infants from designated areas using advanced sensing technology.</p>
+                        <h3 class="project-title">Baby Abduction Prevention System</h3>
+                        <p class="project-description">An innovative security system designed to prevent unauthorized removal of infants from designated areas using advanced sensing technology.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Security System</span>
+                            <span class="project-tag">Sensing Technology</span>
+                            <span class="project-tag">Innovation</span>
+                        </div>
+                        <div class="project-link">
+                            <a href="#">View Details <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
-                    <div class="project-item">
+                    
+                    <div class="project-card">
                         <div class="project-icon">
                             <i class="fas fa-bolt"></i>
                         </div>
-                        <div class="project-details">
-                            <h3>Earth Leakage Detection System</h3>
-                            <p>A safety mechanism designed to detect earth leakage currents and prevent electrical hazards in residential and commercial setups.</p>
+                        <h3 class="project-title">Earth Leakage Detection System</h3>
+                        <p class="project-description">A safety mechanism designed to detect earth leakage currents and prevent electrical hazards in residential and commercial setups.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Electrical Safety</span>
+                            <span class="project-tag">Detection System</span>
+                            <span class="project-tag">Engineering</span>
+                        </div>
+                        <div class="project-link">
+                            <a href="#">View Details <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
             </section>
-
+            
             <!-- Experience Section -->
-            <section id="experience" class="section card">
-                <h2 class="section-title"><i class="fas fa-briefcase"></i> Internships & Experience</h2>
-                <div class="experience-grid">
-                    <div class="experience-item">
-                        <div class="exp-icon">
-                            <i class="fas fa-industry"></i>
+            <section id="experience" class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Experience & Internships</h2>
+                    <div class="section-line"></div>
+                </div>
+                
+                <div class="experience-container">
+                    <div class="experience-card">
+                        <div class="exp-header">
+                            <div class="exp-icon">
+                                <i class="fas fa-industry"></i>
+                            </div>
+                            <div class="exp-info">
+                                <h3 class="exp-title">Internship</h3>
+                                <h4 class="exp-company">On-Load Gears Pvt. Ltd.</h4>
+                                <p class="exp-duration">Mechanical Engineering Intern</p>
+                            </div>
                         </div>
-                        <div class="exp-details">
-                            <h3>On-Load Gears Pvt. Ltd.</h3>
-                            <p class="exp-type">Internship</p>
+                        <ul class="exp-details">
+                            <li>Gained hands-on experience in gear manufacturing processes</li>
+                            <li>Assisted in quality control and inspection procedures</li>
+                            <li>Participated in maintenance of industrial machinery</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="experience-card">
+                        <div class="exp-header">
+                            <div class="exp-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="exp-info">
+                                <h3 class="exp-title">Internship</h3>
+                                <h4 class="exp-company">Zeekers Technology Solutions Pvt. Ltd.</h4>
+                                <p class="exp-duration">Engineering Intern</p>
+                            </div>
+                        </div>
+                        <ul class="exp-details">
+                            <li>Worked on technical solutions and problem-solving</li>
+                            <li>Assisted in product development and testing</li>
+                            <li>Learned about technology implementation in engineering</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="experience-card">
+                        <div class="exp-header">
+                            <div class="exp-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="exp-info">
+                                <h3 class="exp-title">Student Secretary</h3>
+                                <h4 class="exp-company">Mechanical Department</h4>
+                                <p class="exp-duration">Leadership Role</p>
+                            </div>
+                        </div>
+                        <ul class="exp-details">
+                            <li>Led student activities and departmental events</li>
+                            <li>Coordinated between faculty and students</li>
+                            <li>Developed organizational and leadership skills</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Certifications Section -->
+            <section id="certifications" class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Certifications & Activities</h2>
+                    <div class="section-line"></div>
+                </div>
+                
+                <div class="certifications-container">
+                    <div class="cert-grid">
+                        <div class="cert-card">
+                            <div class="cert-icon">
+                                <i class="fas fa-campground"></i>
+                            </div>
+                            <h3 class="cert-title">Tritiya Sopan Training Camp</h3>
+                            <p class="cert-org">Scout & Guides</p>
+                        </div>
+                        
+                        <div class="cert-card">
+                            <div class="cert-icon">
+                                <i class="fas fa-print"></i>
+                            </div>
+                            <h3 class="cert-title">Additive Manufacturing for Future</h3>
+                            <p class="cert-org">Workshop at VIT Vellore</p>
+                        </div>
+                        
+                        <div class="cert-card">
+                            <div class="cert-icon">
+                                <i class="fas fa-cube"></i>
+                            </div>
+                            <h3 class="cert-title">Product Design and Development</h3>
+                            <p class="cert-org">Workshop at TPGIT Vellore</p>
+                        </div>
+                        
+                        <div class="cert-card">
+                            <div class="cert-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3 class="cert-title">NPTEL Online Courses</h3>
+                            <p class="cert-org">2 Courses Completed</p>
                         </div>
                     </div>
-                    <div class="experience-item">
-                        <div class="exp-icon">
-                            <i class="fas fa-cogs"></i>
-                        </div>
-                        <div class="exp-details">
-                            <h3>Zeekers Technology Solutions Pvt. Ltd.</h3>
-                            <p class="exp-type">Internship</p>
+                    
+                    <div class="memberships">
+                        <h3>Professional Memberships</h3>
+                        <div class="membership-list">
+                            <div class="membership-item">
+                                <i class="fas fa-user-tie"></i>
+                                <span>ASHRAE Student Member (Active)</span>
+                            </div>
+                            <div class="membership-item">
+                                <i class="fas fa-user-tie"></i>
+                                <span>ISHRAE Student Member (Active)</span>
+                            </div>
+                            <div class="membership-item">
+                                <i class="fas fa-trophy"></i>
+                                <span>E-Yantra Innovation Challenge - IIT Bombay</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
-
-            <!-- Activities & Certifications -->
-            <section id="activities" class="section card">
-                <h2 class="section-title"><i class="fas fa-award"></i> Certifications & Activities</h2>
-                <div class="activities-grid">
-                    <div class="activity-category">
-                        <h3><i class="fas fa-certificate"></i> Certifications</h3>
-                        <ul>
-                            <li>Tritiya Sopan Training Camp - Scout & Guides</li>
-                            <li>Workshop on "Additive Manufacturing for Future" at VIT Vellore</li>
-                            <li>Workshop on "Product design and Development" at TPGIT Vellore</li>
-                            <li>2 NPTEL Courses</li>
-                        </ul>
+            
+            <!-- Contact Section -->
+            <section id="contact" class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Contact Me</h2>
+                    <div class="section-line"></div>
+                </div>
+                
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <h3>Phone</h3>
+                            <p>+91 8637478050</p>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h3>Email</h3>
+                            <p>gopikrishna.mech@gmail.com</p>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h3>Location</h3>
+                            <p>Theni, TamilNadu, India</p>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                            <h3>LinkedIn</h3>
+                            <p>linkedin.com/in/gopi-krishna26</p>
+                        </div>
                     </div>
-                    <div class="activity-category">
-                        <h3><i class="fas fa-users"></i> Memberships</h3>
-                        <ul>
-                            <li>Student Secretary (Mech.)</li>
-                            <li>ASHRAE Student Member (Active)</li>
-                            <li>ISHRAE Student Member (Active)</li>
-                            <li>E-Yantra Innovation Challenge - IIT Bombay</li>
-                        </ul>
-                    </div>
-                    <div class="activity-category">
-                        <h3><i class="fas fa-palette"></i> Extra-Curricular</h3>
-                        <ul>
-                            <li>Pencil Sketching</li>
-                            <li>Flutist</li>
-                            <li>Silambam & Yoga</li>
-                            <li>Music, Fitness and Books Reading</li>
-                        </ul>
-                    </div>
+                    
+                    <form class="contact-form">
+                        <h3>Send a Message</h3>
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
                 </div>
             </section>
-
-            <!-- Languages -->
-            <section class="section card">
-                <h2 class="section-title"><i class="fas fa-language"></i> Languages</h2>
-                <div class="languages-grid">
-                    <div class="language-item">
-                        <div class="language-name">Tamil</div>
-                        <div class="language-level">Native</div>
-                    </div>
-                    <div class="language-item">
-                        <div class="language-name">English</div>
-                        <div class="language-level">Professional</div>
-                    </div>
-                    <div class="language-item">
-                        <div class="language-name">Telugu</div>
-                        <div class="language-level">Conversational</div>
-                    </div>
-                </div>
-            </section>
+            
+            <footer class="main-footer">
+                <p>© 2024 Gopi Krishna. All rights reserved.</p>
+                <p>Designed with <i class="fas fa-heart"></i> for Mechanical Engineering</p>
+            </footer>
         </main>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-content">
-                <p>&copy; 2024 Gopi Krishna. All rights reserved.</p>
-                <p>Portfolio with animated background using 240 image frames</p>
-                <div class="footer-status">
-                    <span id="animation-status">Animation: <span class="status-on">Running</span></span>
-                    <span id="frame-counter">Frame: 1/240</span>
-                </div>
-            </div>
-        </footer>
     </div>
 
     <script src="script.js"></script>
