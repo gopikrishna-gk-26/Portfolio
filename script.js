@@ -1,186 +1,286 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Background animation setup
+    // Animation setup
     const backgroundContainer = document.getElementById('background-animation');
-    const totalFrames = 240; // Total number of image frames
-    const frameBaseName = 'ezgif-frame-';
-    const frameExtension = '.jpg';
-    const imagesFolder = 'Images/'; // Folder containing the images
-    
-    // Variables to track scroll and animation
-    let isScrolling = false;
-    let scrollTimeout;
+    const totalFrames = 240;
+    const frames = [];
     let currentFrame = 1;
-    let imagesLoaded = 0;
+    let isAnimating = true;
+    let animationSpeed = 5; // Default speed (1-10)
+    let animationInterval;
     
-    // Preload images for smoother animation
-    function preloadImages() {
-        console.log('Preloading animation frames...');
+    // Animation control elements
+    const toggleButton = document.getElementById('toggle-animation');
+    const pauseButton = document.getElementById('pause-animation');
+    const speedSlider = document.getElementById('speed-slider');
+    const animationStatus = document.getElementById('animation-status').querySelector('.status-on');
+    const frameCounter = document.getElementById('frame-counter');
+    
+    // Preload all animation frames
+    function preloadFrames() {
+        console.log('Loading animation frames...');
         
-        // We'll load a subset of images initially for performance
-        // and load the rest as needed
-        const preloadCount = Math.min(50, totalFrames);
-        
-        for (let i = 1; i <= preloadCount; i++) {
-            const img = new Image();
+        // Create and preload all frames
+        for (let i = 1; i <= totalFrames; i++) {
             const frameNumber = i.toString().padStart(3, '0');
-            img.src = imagesFolder + frameBaseName + frameNumber + frameExtension;
+            const frame = new Image();
+            frame.src = `Images/ezgif-frame-${frameNumber}.jpg`;
+            frame.alt = `Animation Frame ${frameNumber}`;
             
-            img.onload = function() {
-                imagesLoaded++;
-                if (imagesLoaded === preloadCount) {
-                    console.log(`Preloaded ${preloadCount} frames`);
-                    // Set initial background
-                    updateBackground(1);
+            frame.onload = function() {
+                frames[i] = frame;
+                if (i === 1) {
+                    // Start animation with first frame loaded
+                    startAnimation();
+                    updateFrameCounter();
                 }
             };
             
-            img.onerror = function() {
+            frame.onerror = function() {
                 console.warn(`Failed to load frame ${i}`);
-                imagesLoaded++;
+                // Create a placeholder frame if loading fails
+                frames[i] = createPlaceholderFrame();
             };
         }
+    }
+    
+    // Create a placeholder frame if images fail to load
+    function createPlaceholderFrame() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 800;
+        canvas.height = 600;
+        const ctx = canvas.getContext('2d');
         
-        // Load the rest of the images in the background
-        setTimeout(() => {
-            for (let i = preloadCount + 1; i <= totalFrames; i++) {
-                const img = new Image();
-                const frameNumber = i.toString().padStart(3, '0');
-                img.src = imagesFolder + frameBaseName + frameNumber + frameExtension;
+        // Create gradient background
+        const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        gradient.addColorStop(0, '#1a365d');
+        gradient.addColorStop(1, '#2c5282');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Add some pattern
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+        for (let i = 0; i < 50; i++) {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height;
+            const radius = Math.random() * 20 + 5;
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        
+        // Convert canvas to image
+        const img = new Image();
+        img.src = canvas.toDataURL('image/jpeg');
+        return img;
+    }
+    
+    // Start the animation
+    function startAnimation() {
+        clearInterval(animationInterval);
+        
+        // Calculate interval based on speed (faster speed = smaller interval)
+        const interval = 1000 / (animationSpeed * 2);
+        
+        animationInterval = setInterval(function() {
+            if (isAnimating) {
+                // Update to next frame
+                currentFrame++;
+                if (currentFrame > totalFrames) {
+                    currentFrame = 1; // Loop back to first frame
+                }
+                
+                // Update background
+                updateBackground();
+                updateFrameCounter();
             }
-        }, 1000);
+        }, interval);
+        
+        console.log('Animation started with speed:', animationSpeed);
     }
     
-    // Update background based on frame number
-    function updateBackground(frameNum) {
-        const frameNumber = frameNum.toString().padStart(3, '0');
-        const imagePath = imagesFolder + frameBaseName + frameNumber + frameExtension;
-        
-        // Use a timeout to throttle background changes during rapid scrolling
-        setTimeout(() => {
-            backgroundContainer.style.backgroundImage = `url('${imagePath}')`;
-        }, 0);
+    // Update the background with current frame
+    function updateBackground() {
+        if (frames[currentFrame]) {
+            backgroundContainer.style.backgroundImage = `url('${frames[currentFrame].src}')`;
+        }
     }
     
-    // Calculate which frame to show based on scroll position
-    function calculateFrameFromScroll() {
-        // Get scroll position and document height
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        
-        // Calculate scroll percentage (0 to 1)
-        const scrollPercent = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
-        
-        // Calculate frame number based on scroll percentage
-        // Add 1 because frames start from 1
-        let frame = Math.floor(scrollPercent * totalFrames) + 1;
-        
-        // Ensure frame is within valid range
-        frame = Math.max(1, Math.min(frame, totalFrames));
-        
-        return frame;
+    // Update frame counter display
+    function updateFrameCounter() {
+        frameCounter.textContent = `Frame: ${currentFrame}/${totalFrames}`;
     }
     
-    // Handle scroll events
-    function handleScroll() {
-        // Clear any existing timeout
-        if (scrollTimeout) {
-            clearTimeout(scrollTimeout);
+    // Toggle animation on/off
+    function toggleAnimation() {
+        isAnimating = !isAnimating;
+        
+        if (isAnimating) {
+            animationStatus.textContent = 'Running';
+            animationStatus.style.color = '#38a169';
+            toggleButton.innerHTML = '<i class="fas fa-pause"></i> Pause Animation';
+            console.log('Animation resumed');
+        } else {
+            animationStatus.textContent = 'Paused';
+            animationStatus.style.color = '#e53e3e';
+            toggleButton.innerHTML = '<i class="fas fa-play"></i> Resume Animation';
+            console.log('Animation paused');
+        }
+    }
+    
+    // Pause animation
+    function pauseAnimation() {
+        isAnimating = false;
+        animationStatus.textContent = 'Paused';
+        animationStatus.style.color = '#e53e3e';
+        toggleButton.innerHTML = '<i class="fas fa-play"></i> Resume Animation';
+        console.log('Animation paused');
+    }
+    
+    // Update animation speed
+    function updateAnimationSpeed() {
+        animationSpeed = parseInt(speedSlider.value);
+        
+        if (isAnimating) {
+            // Restart animation with new speed
+            startAnimation();
         }
         
-        // Calculate new frame
-        const newFrame = calculateFrameFromScroll();
-        
-        // Only update if frame has changed
-        if (newFrame !== currentFrame) {
-            currentFrame = newFrame;
-            updateBackground(currentFrame);
-        }
-        
-        // Set a timeout to handle scroll end
-        scrollTimeout = setTimeout(function() {
-            isScrolling = false;
-        }, 100);
+        console.log('Animation speed updated to:', animationSpeed);
     }
     
-    // Smooth scroll for navigation links
-    document.querySelectorAll('nav a').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
+    // Initialize animation controls
+    function initControls() {
+        // Toggle animation button
+        toggleButton.addEventListener('click', toggleAnimation);
+        
+        // Pause animation button
+        pauseButton.addEventListener('click', pauseAnimation);
+        
+        // Speed slider
+        speedSlider.addEventListener('input', updateAnimationSpeed);
+        
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                toggleAnimation();
+            } else if (e.code === 'ArrowUp') {
+                e.preventDefault();
+                if (animationSpeed < 10) {
+                    speedSlider.value = ++animationSpeed;
+                    updateAnimationSpeed();
+                }
+            } else if (e.code === 'ArrowDown') {
+                e.preventDefault();
+                if (animationSpeed > 1) {
+                    speedSlider.value = --animationSpeed;
+                    updateAnimationSpeed();
+                }
             }
         });
-    });
+        
+        console.log('Animation controls initialized');
+    }
     
-    // Add scroll indicator to navigation
-    function updateActiveNav() {
+    // Smooth scroll for navigation
+    function initSmoothScroll() {
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    }
+    
+    // Update active navigation based on scroll
+    function initActiveNav() {
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('nav a');
         
-        let currentSectionId = '';
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - 100;
-            const sectionHeight = section.clientHeight;
+        window.addEventListener('scroll', function() {
+            let current = '';
             
-            if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-                currentSectionId = '#' + section.getAttribute('id');
-            }
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
         });
         
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === currentSectionId) {
-                link.classList.add('active');
+        // Add active class styling
+        const style = document.createElement('style');
+        style.textContent = `
+            .nav a.active {
+                background-color: #2c5282 !important;
+                color: white !important;
             }
-        });
+            
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .section {
+                animation: fadeInUp 0.8s ease-out;
+            }
+            
+            .section:nth-child(2) { animation-delay: 0.1s; }
+            .section:nth-child(3) { animation-delay: 0.2s; }
+            .section:nth-child(4) { animation-delay: 0.3s; }
+            .section:nth-child(5) { animation-delay: 0.4s; }
+            .section:nth-child(6) { animation-delay: 0.5s; }
+        `;
+        document.head.appendChild(style);
     }
     
-    // Add active class styling to navigation
-    const style = document.createElement('style');
-    style.textContent = `
-        .nav a.active {
-            background-color: #2c5282 !important;
-            color: white !important;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .section {
-            animation: fadeIn 0.8s ease-out;
-        }
-    `;
-    document.head.appendChild(style);
-    
-    // Initialize
+    // Initialize everything
     function init() {
-        // Start preloading images
-        preloadImages();
+        console.log('Initializing portfolio with animation...');
         
-        // Add scroll event listener
-        window.addEventListener('scroll', function() {
-            isScrolling = true;
-            handleScroll();
-            updateActiveNav();
-        });
+        // Preload animation frames
+        preloadFrames();
         
-        // Initial active nav update
-        updateActiveNav();
+        // Initialize controls
+        initControls();
         
-        // Log initialization
-        console.log('Portfolio with scroll-triggered animation initialized');
-        console.log('Total frames available: ' + totalFrames);
-        console.log('Image folder: ' + imagesFolder);
+        // Initialize smooth scroll
+        initSmoothScroll();
+        
+        // Initialize active navigation
+        initActiveNav();
+        
+        // Log initialization complete
+        setTimeout(() => {
+            console.log('Portfolio initialization complete');
+            console.log(`Total frames: ${totalFrames}`);
+            console.log('Use spacebar to pause/resume animation');
+            console.log('Use arrow up/down to adjust speed');
+        }, 1000);
     }
     
     // Start the application
