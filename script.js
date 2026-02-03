@@ -1,288 +1,343 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Animation setup
+    // Initialize animation
+    initBackgroundAnimation();
+    
+    // Initialize navigation
+    initNavigation();
+    
+    // Initialize skill bars animation
+    initSkillBars();
+    
+    // Initialize form submission
+    initContactForm();
+    
+    // Initialize scroll animations
+    initScrollAnimations();
+});
+
+// Background Animation
+function initBackgroundAnimation() {
     const backgroundContainer = document.getElementById('background-animation');
     const totalFrames = 240;
-    const frames = [];
+    const frameBaseName = 'ezgif-frame-';
+    const frameExtension = '.jpg';
+    const imagesFolder = 'Images/';
+    
     let currentFrame = 1;
     let isAnimating = true;
-    let animationSpeed = 5; // Default speed (1-10)
     let animationInterval;
     
-    // Animation control elements
-    const toggleButton = document.getElementById('toggle-animation');
-    const pauseButton = document.getElementById('pause-animation');
-    const speedSlider = document.getElementById('speed-slider');
-    const animationStatus = document.getElementById('animation-status').querySelector('.status-on');
-    const frameCounter = document.getElementById('frame-counter');
-    
-    // Preload all animation frames
+    // Preload first few frames
     function preloadFrames() {
-        console.log('Loading animation frames...');
+        const preloadCount = Math.min(20, totalFrames);
         
-        // Create and preload all frames
-        for (let i = 1; i <= totalFrames; i++) {
+        for (let i = 1; i <= preloadCount; i++) {
+            const img = new Image();
             const frameNumber = i.toString().padStart(3, '0');
-            const frame = new Image();
-            frame.src = `Images/ezgif-frame-${frameNumber}.jpg`;
-            frame.alt = `Animation Frame ${frameNumber}`;
+            img.src = imagesFolder + frameBaseName + frameNumber + frameExtension;
             
-            frame.onload = function() {
-                frames[i] = frame;
+            img.onload = function() {
                 if (i === 1) {
-                    // Start animation with first frame loaded
+                    // Start with first frame
+                    backgroundContainer.style.backgroundImage = `url('${img.src}')`;
                     startAnimation();
-                    updateFrameCounter();
                 }
             };
-            
-            frame.onerror = function() {
-                console.warn(`Failed to load frame ${i}`);
-                // Create a placeholder frame if loading fails
-                frames[i] = createPlaceholderFrame();
-            };
         }
     }
     
-    // Create a placeholder frame if images fail to load
-    function createPlaceholderFrame() {
-        const canvas = document.createElement('canvas');
-        canvas.width = 800;
-        canvas.height = 600;
-        const ctx = canvas.getContext('2d');
-        
-        // Create gradient background
-        const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-        gradient.addColorStop(0, '#1a365d');
-        gradient.addColorStop(1, '#2c5282');
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // Add some pattern
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-        for (let i = 0; i < 50; i++) {
-            const x = Math.random() * canvas.width;
-            const y = Math.random() * canvas.height;
-            const radius = Math.random() * 20 + 5;
-            ctx.beginPath();
-            ctx.arc(x, y, radius, 0, Math.PI * 2);
-            ctx.fill();
-        }
-        
-        // Convert canvas to image
-        const img = new Image();
-        img.src = canvas.toDataURL('image/jpeg');
-        return img;
-    }
-    
-    // Start the animation
+    // Start animation
     function startAnimation() {
-        clearInterval(animationInterval);
-        
-        // Calculate interval based on speed (faster speed = smaller interval)
-        const interval = 1000 / (animationSpeed * 2);
+        // Calculate interval for smooth animation (approx 30fps)
+        const interval = 1000 / 30;
         
         animationInterval = setInterval(function() {
-            if (isAnimating) {
-                // Update to next frame
-                currentFrame++;
-                if (currentFrame > totalFrames) {
-                    currentFrame = 1; // Loop back to first frame
-                }
-                
-                // Update background
-                updateBackground();
-                updateFrameCounter();
+            if (!isAnimating) return;
+            
+            currentFrame++;
+            if (currentFrame > totalFrames) {
+                currentFrame = 1;
             }
+            
+            const frameNumber = currentFrame.toString().padStart(3, '0');
+            const imagePath = imagesFolder + frameBaseName + frameNumber + frameExtension;
+            
+            // Update background
+            backgroundContainer.style.backgroundImage = `url('${imagePath}')`;
         }, interval);
-        
-        console.log('Animation started with speed:', animationSpeed);
     }
     
-    // Update the background with current frame
-    function updateBackground() {
-        if (frames[currentFrame]) {
-            backgroundContainer.style.backgroundImage = `url('${frames[currentFrame].src}')`;
-        }
-    }
-    
-    // Update frame counter display
-    function updateFrameCounter() {
-        frameCounter.textContent = `Frame: ${currentFrame}/${totalFrames}`;
-    }
-    
-    // Toggle animation on/off
-    function toggleAnimation() {
-        isAnimating = !isAnimating;
-        
-        if (isAnimating) {
-            animationStatus.textContent = 'Running';
-            animationStatus.style.color = '#38a169';
-            toggleButton.innerHTML = '<i class="fas fa-pause"></i> Pause Animation';
-            console.log('Animation resumed');
+    // Pause/resume animation on visibility change
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            isAnimating = false;
         } else {
-            animationStatus.textContent = 'Paused';
-            animationStatus.style.color = '#e53e3e';
-            toggleButton.innerHTML = '<i class="fas fa-play"></i> Resume Animation';
-            console.log('Animation paused');
+            isAnimating = true;
         }
-    }
+    });
     
-    // Pause animation
-    function pauseAnimation() {
-        isAnimating = false;
-        animationStatus.textContent = 'Paused';
-        animationStatus.style.color = '#e53e3e';
-        toggleButton.innerHTML = '<i class="fas fa-play"></i> Resume Animation';
-        console.log('Animation paused');
-    }
+    // Start preloading
+    preloadFrames();
     
-    // Update animation speed
-    function updateAnimationSpeed() {
-        animationSpeed = parseInt(speedSlider.value);
-        
-        if (isAnimating) {
-            // Restart animation with new speed
-            startAnimation();
+    console.log('Background animation initialized');
+}
+
+// Navigation
+function initNavigation() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    const contentSections = document.querySelectorAll('.content-section');
+    
+    // Set first section as active by default
+    contentSections[0].classList.add('active');
+    
+    // Handle navigation clicks
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Remove active class from all links
+            navLinks.forEach(l => l.classList.remove('active'));
+            
+            // Add active class to clicked link
+            this.classList.add('active');
+            
+            // Get target section
+            const targetId = this.getAttribute('data-target');
+            
+            // Hide all sections
+            contentSections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show target section
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                
+                // Scroll to top of section with smooth behavior
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // Add keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        // Don't navigate if user is typing in a form
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+            return;
         }
         
-        console.log('Animation speed updated to:', animationSpeed);
-    }
+        if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            
+            const activeLink = document.querySelector('.nav-link.active');
+            let nextLink;
+            
+            if (e.key === 'ArrowDown') {
+                nextLink = activeLink.parentElement.nextElementSibling;
+                if (nextLink) {
+                    nextLink.querySelector('.nav-link').click();
+                } else {
+                    // Loop to first
+                    document.querySelector('.nav-link').click();
+                }
+            } else if (e.key === 'ArrowUp') {
+                nextLink = activeLink.parentElement.previousElementSibling;
+                if (nextLink) {
+                    nextLink.querySelector('.nav-link').click();
+                } else {
+                    // Loop to last
+                    document.querySelectorAll('.nav-link').item(document.querySelectorAll('.nav-link').length - 1).click();
+                }
+            }
+        }
+    });
     
-    // Initialize animation controls
-    function initControls() {
-        // Toggle animation button
-        toggleButton.addEventListener('click', toggleAnimation);
-        
-        // Pause animation button
-        pauseButton.addEventListener('click', pauseAnimation);
-        
-        // Speed slider
-        speedSlider.addEventListener('input', updateAnimationSpeed);
-        
-        // Add keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            if (e.code === 'Space') {
-                e.preventDefault();
-                toggleAnimation();
-            } else if (e.code === 'ArrowUp') {
-                e.preventDefault();
-                if (animationSpeed < 10) {
-                    speedSlider.value = ++animationSpeed;
-                    updateAnimationSpeed();
-                }
-            } else if (e.code === 'ArrowDown') {
-                e.preventDefault();
-                if (animationSpeed > 1) {
-                    speedSlider.value = --animationSpeed;
-                    updateAnimationSpeed();
-                }
+    console.log('Navigation initialized');
+}
+
+// Skill Bars Animation
+function initSkillBars() {
+    const skillBars = document.querySelectorAll('.skill-progress');
+    
+    // Create observer to animate skill bars when they come into view
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Get the width from the style attribute
+                const width = entry.target.style.width;
+                // Reset width to 0 for animation
+                entry.target.style.width = '0%';
+                
+                // Animate to the target width
+                setTimeout(() => {
+                    entry.target.style.transition = 'width 1.5s ease-in-out';
+                    entry.target.style.width = width;
+                }, 300);
+                
+                // Stop observing after animation
+                observer.unobserve(entry.target);
             }
         });
-        
-        console.log('Animation controls initialized');
-    }
+    }, {
+        threshold: 0.5
+    });
     
-    // Smooth scroll for navigation
-    function initSmoothScroll() {
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-                }
-            });
+    // Observe each skill bar
+    skillBars.forEach(bar => {
+        observer.observe(bar);
+    });
+    
+    console.log('Skill bars animation initialized');
+}
+
+// Contact Form
+function initContactForm() {
+    const contactForm = document.querySelector('.contact-form');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const name = formData.get('name') || this.querySelector('input[type="text"]').value;
+            const email = formData.get('email') || this.querySelector('input[type="email"]').value;
+            const subject = formData.get('subject') || this.querySelectorAll('input[type="text"]')[1].value;
+            const message = formData.get('message') || this.querySelector('textarea').value;
+            
+            // Simple validation
+            if (!name || !email || !message) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // In a real application, you would send this data to a server
+            // For now, we'll just show a success message
+            alert(`Thank you, ${name}! Your message has been sent. I'll get back to you soon at ${email}.`);
+            
+            // Reset form
+            this.reset();
         });
     }
     
-    // Update active navigation based on scroll
-    function initActiveNav() {
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('nav a');
-        
-        window.addEventListener('scroll', function() {
-            let current = '';
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                
-                if (window.scrollY >= (sectionTop - 150)) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
+    console.log('Contact form initialized');
+}
+
+// Scroll Animations
+function initScrollAnimations() {
+    // Animate elements when they come into view
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
         });
-        
-        // Add active class styling
-        const style = document.createElement('style');
-        style.textContent = `
-            .nav a.active {
-                background-color: #2c5282 !important;
-                color: white !important;
-            }
-            
-            @keyframes fadeInUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-            
-            .section {
-                animation: fadeInUp 0.8s ease-out;
-            }
-            
-            .section:nth-child(2) { animation-delay: 0.1s; }
-            .section:nth-child(3) { animation-delay: 0.2s; }
-            .section:nth-child(4) { animation-delay: 0.3s; }
-            .section:nth-child(5) { animation-delay: 0.4s; }
-            .section:nth-child(6) { animation-delay: 0.5s; }
-        `;
-        document.head.appendChild(style);
-    }
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    });
     
-    // Initialize everything
-    function init() {
-        console.log('Initializing portfolio with animation...');
-        
-        // Preload animation frames
-        preloadFrames();
-        
-        // Initialize controls
-        initControls();
-        
-        // Initialize smooth scroll
-        initSmoothScroll();
-        
-        // Initialize active navigation
-        initActiveNav();
-        
-        // Log initialization complete
-        setTimeout(() => {
-            console.log('Portfolio initialization complete');
-            console.log(`Total frames: ${totalFrames}`);
-            console.log('Use spacebar to pause/resume animation');
-            console.log('Use arrow up/down to adjust speed');
-        }, 1000);
-    }
+    // Observe elements to animate
+    const animateElements = document.querySelectorAll('.stat-card, .project-card, .experience-card, .cert-card, .contact-card');
+    animateElements.forEach(el => {
+        observer.observe(el);
+    });
     
-    // Start the application
-    init();
+    // Add scroll to top button
+    const scrollTopBtn = document.createElement('button');
+    scrollTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    scrollTopBtn.className = 'scroll-top-btn';
+    document.body.appendChild(scrollTopBtn);
+    
+    // Style scroll to top button
+    const style = document.createElement('style');
+    style.textContent = `
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .scroll-top-btn.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-top-btn:hover {
+            background-color: #2563eb;
+            transform: translateY(-5px);
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-in {
+            animation: slideIn 0.8s ease forwards;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Show/hide scroll to top button
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 500) {
+            scrollTopBtn.classList.add('show');
+        } else {
+            scrollTopBtn.classList.remove('show');
+        }
+    });
+    
+    // Scroll to top when clicked
+    scrollTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    console.log('Scroll animations initialized');
+}
+
+// Initialize typing effect for hero text (optional)
+function initTypingEffect() {
+    const heroTitle = document.querySelector('.hero-title');
+    if (!heroTitle) return;
+    
+    const originalText = heroTitle.innerHTML;
+    const highlightedText = originalText.replace('<span class="highlight">Gopi Krishna</span>', '');
+    
+    // Optional: You could implement a typing effect here
+    // For now, we'll just leave it as is
+}
+
+// Initialize when page is fully loaded
+window.addEventListener('load', function() {
+    console.log('Portfolio fully loaded');
+    
+    // Add loading animation completion
+    document.body.classList.add('loaded');
 });
