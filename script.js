@@ -5,7 +5,7 @@ const context = canvas.getContext("2d");
 const frameCount = 240;
 const currentFrame = index => (
   // This generates the path: images/ezgif-frame-001.jpg, etc.
-  `images/ezgif-frame-${index.toString().padStart(3, '0')}.jpg`
+  `Images/ezgif-frame-${index.toString().padStart(3, '0')}.jpg`
 );
 
 // Preload Images
